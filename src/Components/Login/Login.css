@@ -1,0 +1,13 @@
+#password{
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+#eyeSlashIcon{
+    position: absolute;
+    margin-right: 8px;
+    height: 24px;
+    width: 24px;
+    cursor: pointer;
+}
