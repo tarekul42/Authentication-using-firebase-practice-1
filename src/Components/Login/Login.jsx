@@ -40,6 +40,7 @@ const Login = () => {
             const loggedUser = userCredential.user;
             setSuccess("User Login successful");
             setError('')
+            event.target.reset();
             console.log(loggedUser);
 
         })

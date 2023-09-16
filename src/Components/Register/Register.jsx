@@ -59,11 +59,14 @@ const Register = () => {
         .then((result) =>{
             const loggedUser = result.user;
             console.log(loggedUser);
+            event.target.reset();
+            setSuccess('Your registration in successful');
+            setError('')
 
         })
         .catch(error =>{
-            setError(error.message)
-            console.log(error.message);
+            setError(error.message);
+            setSuccess('')
         })
 
     }
