@@ -6,10 +6,13 @@ import './Login.css'
 import { Link } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import app from '../../firebase/firebase.config';
+import './Login.css'
+
+const auth = getAuth(app);
+
 
 const Login = () => {
 
-    const auth = getAuth(app);
 
     const [showPassword, setShowPassword] = useState(false);
     const [hidePassword, sethidePassword] = useState(true);
@@ -28,15 +31,22 @@ const Login = () => {
 
     const handleLoginForm = event =>{
         event.preventDefault();
+        const email = event.target.email.value;
+        const password = event.target.password.value;
+        console.log(email, password);   
 
         signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-            const user = userCredential.user;
-            console.log(user);
+            const loggedUser = userCredential.user;
+            setSuccess("User Login successful");
+            setError('')
+            console.log(loggedUser);
+
         })
         .catch((error) => {
             const errorMessage = error.message;
             setError(errorMessage);
+            setSuccess('')
             console.log(errorMessage);
         });
     }
@@ -71,6 +81,7 @@ const Login = () => {
             </Form.Group>
 
             <p>Don't have any account? Please <Link to='/register'>Register</Link></p>
+            <p className='text-success'>{success}</p>
 
             <Button variant="primary" type="submit">
                 Submit
