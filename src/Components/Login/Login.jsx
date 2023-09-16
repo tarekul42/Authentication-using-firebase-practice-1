@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { BeakerIcon, EyeSlashIcon, EyeIcon } from '@heroicons/react/24/solid'
+import {EyeSlashIcon, EyeIcon } from '@heroicons/react/24/solid'
 import './Login.css'
+import { Link } from 'react-router-dom';
 
 const Login = () => {
 
@@ -18,9 +19,14 @@ const Login = () => {
         sethidePassword(true)
     }
 
+    const handleLoginForm = event =>{
+        event.preventDefault()
+    }
+
     return (
         <div className='w-50 mx-auto'>
-            <Form>
+            <h4 className='text-primary text-center mt-5'>Login</h4>
+            <Form onSubmit={handleLoginForm}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
                 <Form.Control id='email' type="email" name='email' placeholder="Enter email" />
@@ -44,6 +50,8 @@ const Login = () => {
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
                 <Form.Check type="checkbox" label="Check me out" />
             </Form.Group>
+
+            <p>Don't have any account? Please <Link to='/register'>Register</Link></p>
 
             <Button variant="primary" type="submit">
                 Submit

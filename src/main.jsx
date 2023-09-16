@@ -5,20 +5,25 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {createBrowserRouter, RouterProvider,} from "react-router-dom";
 import Home from './Components/Home/Home.jsx';
 import Login from './Components/Login/Login.jsx';
-import Registration from './Components/Registration/Registration.jsx';
+import Register from './Components/Register/Register';
+import Layout from './Components/Layout/Layout';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home/>,
+    element: <Layout/>,
     children:[
       {
         path: "/",
+        element: <Home/>
+      },
+      {
+        path: "/login",
         element: <Login/>
       },
       {
-        path: "/registration",
-        element: <Registration/>
+        path: "/register",
+        element: <Register/>
       }
     ]
   },
