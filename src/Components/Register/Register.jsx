@@ -3,8 +3,12 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import {EyeSlashIcon, EyeIcon } from '@heroicons/react/24/solid'
 import { Link } from 'react-router-dom';
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import app from '../../firebase/firebase.config'
 
 const Register = () => {
+
+    const auth = getAuth(app);
 
     const [showPassword, setShowPassword] = useState(false);
     const [hidePassword, sethidePassword] = useState(true);
@@ -49,6 +53,18 @@ const Register = () => {
             setSuccess('Your registration is successfull.')
             setError('')
         }
+
+        // create new user
+        createUserWithEmailAndPassword(auth, email, password)
+        .then((result) =>{
+            const loggedUser = result.user;
+            console.log(loggedUser);
+
+        })
+        .catch(error =>{
+            setError(error.message)
+            console.log(error.message);
+        })
 
     }
 

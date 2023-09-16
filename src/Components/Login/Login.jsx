@@ -4,11 +4,18 @@ import Form from 'react-bootstrap/Form';
 import {EyeSlashIcon, EyeIcon } from '@heroicons/react/24/solid'
 import './Login.css'
 import { Link } from 'react-router-dom';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import app from '../../firebase/firebase.config';
 
 const Login = () => {
 
-    const [showPassword, setShowPassword] = useState(false)
-    const [hidePassword, sethidePassword] = useState(true)
+    const auth = getAuth(app);
+
+    const [showPassword, setShowPassword] = useState(false);
+    const [hidePassword, sethidePassword] = useState(true);
+
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
 
     const handleShowPassword = (event) =>{
         setShowPassword(true)
@@ -20,7 +27,18 @@ const Login = () => {
     }
 
     const handleLoginForm = event =>{
-        event.preventDefault()
+        event.preventDefault();
+
+        signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            const user = userCredential.user;
+            console.log(user);
+        })
+        .catch((error) => {
+            const errorMessage = error.message;
+            setError(errorMessage);
+            console.log(errorMessage);
+        });
     }
 
     return (
@@ -45,6 +63,7 @@ const Login = () => {
                 }
                 </span>
                 </p>
+                <p className='text-danger'>{error}</p>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
