@@ -30,19 +30,24 @@ const Register = () => {
         // password validation
         setError('')
         if(password.length < 8){
-            setError('Your Password should at least 8 character');
+            setError('Your Password should at least 8 character.');
             return;
         }
         else if(!/(?=.*[a-zA-Z])/.test(password)){
-            setError('Your Password should contain at least 1 alphabetic character');
+            setError('Your Password should contain at least 1 alphabetic character.');
             return;
         }
         else if(!/(?=.*[@^*!#\$%&\?].*)/.test(password)){
-            setError('Your password should contain at least 2 special characters');
+            setError('Your password should contain at least 1 special characters.');
             return;
         }
         else if(!/(?=.*[1-9])/){
-            setError('Your password should contain at least 1 digit')
+            setError('Your password should contain at least 1 digit.');
+            return;
+        }
+        else{
+            setSuccess('Your registration is successfull.')
+            setError('')
         }
 
     }
@@ -83,6 +88,7 @@ const Register = () => {
                 Submit
             </Button>
             </Form>
+                <p className='text-info'>{success}</p>
         </div>
     );
 };
